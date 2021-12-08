@@ -19,12 +19,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 
         def Pressed(channel):
-            if self.checkBox.checkState() == 1:
+            if self.checkBox.isChecked():
+                
                 self.checkBox.setChecked(0)
 
             else:
                 self.checkBox.setChecked(1)
-                
+
+
+
         GPIO.add_event_detect(38, GPIO.BOTH)
 
         GPIO.add_event_callback(38,Pressed)
