@@ -5,7 +5,6 @@ from PyQt5.QtWidgets import QApplication, QDialog, QMainWindow
 from PyQt5 import QtWidgets
 from Flash import Ui_MainWindow
 
-
 import RPi.GPIO as GPIO  # import GPIO
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -17,7 +16,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.pushButton.released.connect(lambda: GPIO.output(40,0))
 
-        GPIO.add_event_detect(40, GPIO.BOTH, self.box)
+
+        GPIO.add_event_detect(17, GPIO.BOTH)
 
     # def on(self):
     #     self.checkBox.setChecked(1)
@@ -27,7 +27,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         try:
             while True:
-                if GPIO.event_detected(40):
+                if GPIO.event_detected(17):
                     
                     if self.checkBox.checkState() == 1:
                         self.checkBox.setChecked(0)
@@ -44,6 +44,7 @@ if __name__ == '__main__':
 
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(40, GPIO.OUT)
+    GPIO.setup(17,GPIO.IN)
 
     app = QApplication(sys.argv)
     myapp = MainWindow()
