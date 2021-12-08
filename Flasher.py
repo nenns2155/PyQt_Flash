@@ -25,7 +25,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # def off(self):
     #     self.checkBox.setChecked(0)
 
-    def Pressed(self):
+    def Pressed(self, channel):
         if self.checkBox.checkState() == 1:
             self.checkBox.setChecked(0)
 
