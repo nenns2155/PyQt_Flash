@@ -17,7 +17,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pushButton.released.connect(lambda: GPIO.output(40,0))
 
 
-        GPIO.add_event_detect(38, GPIO.BOTH)
+        GPIO.add_event_detect(38, GPIO.BOTH, self.Pressed)
 
     # def on(self):
     #     self.checkBox.setChecked(1)
@@ -25,19 +25,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     # def off(self):
     #     self.checkBox.setChecked(0)
 
-        try:
-            while True:
-                if GPIO.event_detected(38):
-                    
-                    if self.checkBox.checkState() == 1:
-                        self.checkBox.setChecked(0)
+    def Pressed(self):
+        if self.checkBox.checkState() == 1:
+            self.checkBox.setChecked(0)
+            
+        else:
+            self.checkBox.setChecked(1)
 
-                    else:
-                        self.checkBox.setChecked(1)
+
+        # try:
+        #     while True:
+        #         if GPIO.event_detected(38):
+                    
+                    # if self.checkBox.checkState() == 1:
+                    #     self.checkBox.setChecked(0)
+
+                    # else:
+                    #     self.checkBox.setChecked(1)
 
                     
-        except KeyboardInterrupt:
-            pass
+        # except KeyboardInterrupt:
+        #     pass
 
         
 if __name__ == '__main__':
@@ -45,7 +53,6 @@ if __name__ == '__main__':
     GPIO.setmode(GPIO.BOARD)
 
     GPIO.setup(40, GPIO.OUT)
-    
     GPIO.setup(38,GPIO.IN)
 
     app = QApplication(sys.argv)
